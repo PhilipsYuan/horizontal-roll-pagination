@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+    * {
+        margin:0;
+        padding:0;
+    }
+    .scroll {
+        margin: 100px auto;
+    }
+    body {
+        font-size:12px;
+    }
+    .box {
+        height:66px;
+        float:left;
+        width:420px;
+        overflow: hidden;
+        position:relative;
+    }
+    .box li {
+        display:block;
+        float:left;
+        margin-left:5px;
+        margin-right:5px;
+        width:100px;
+        height:70px;
+        background:#BBB;
+        font-size:50px;
+        color:#ccc;
+        line-height:66px;
+        text-decoration:none;
+        text-align:center;
+        cursor:pointer;
+    }
+    .box li:hover {
+        color:#999;
+    }
+    .box li.active {
+        background-position:-174px 0;
+        color:#555;
+        cursor:default;
+    }
+    .prev, .next {
+        display:block;
+        float:left;
+        width:43px;
+        height:23px;
+        margin:20px 10px;
+        cursor:pointer;
+        border: 1px solid #cccccc;
+    }
+    .scroll_list{ width:10000em; position:absolute; }
+</style>
+<body>
+<div class="scroll" style="width:550px;">
+    <!-- "prev page" link -->
+    <button class="prev" >前一页</button>
+    <div class="box">
+        <div class="scroll_list">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+                <li>10</li>
+                <li>11</li>
+                <li>12</li>
+                <li>13</li>
+                <li>14</li>
+                <li>15</li>
+                <li>16</li>
+                <li>17</li>
+            </ul>
+        </div>
+    </div>
+    <!-- "next page" link -->
+    <button class="next">后一页</button>
+</div>
+<script src="./main.js"></script>
+<script>
+    let config = {
+        preDom: document.getElementsByClassName('prev')[0],
+        nextDom: document.getElementsByClassName('next')[0],
+        parentDom: document.getElementsByClassName('scroll_list')[0],
+        itemsDom: document.getElementsByTagName('ul')[0],
+        box: document.getElementsByClassName('box')[0],
+        loop: true
+    };
+    let horizontalRollPagination = new HorizontalRollPagination(config);
+    horizontalRollPagination.init();
+</script>
+</body>
+</html>
