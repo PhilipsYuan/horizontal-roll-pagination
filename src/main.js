@@ -5,7 +5,7 @@ class HorizontalRollPagination {
         // 又按钮
         this.nextDom = config.nextDom;
         // 放东西的父节点
-        this.parentDom = config.parentDom;
+        this.scrollDom = config.scrollDom;
         // 盒子
         this.boxDom = config.box;
         this.loop = config.loop || false;
@@ -39,6 +39,9 @@ class HorizontalRollPagination {
         this.nextDom.addEventListener('click', this.nextEvent.bind(this), false);
     }
 
+    /**
+     * 可视区域发生改变时
+     */
     refresh() {
         let parentWidth = parseInt(window.getComputedStyle(this.boxDom).width);
         let gap = parentWidth - this.parentWidth;
@@ -49,7 +52,7 @@ class HorizontalRollPagination {
     }
 
     /**
-     * 相数发生改变时，需要重新设置
+     * 展示数发生改变时，需要重新设置
      */
     reset() {
         this.subList = this.getChildren(this.itemsDom);
@@ -65,7 +68,7 @@ class HorizontalRollPagination {
         let restWidth = this.subWidth * this.count;
         // 最后一页
         if(this.restWidth === this.moveWidth && this.loop) {
-            let element = this.parentDom;
+            let element = this.scrollDom;
             let target = - this.moveWidth;
             this.animate(element, this.left, target, true, this.speed, true);
             this.left = target;
@@ -75,7 +78,7 @@ class HorizontalRollPagination {
             if(this.moveWidth - this.restWidth < restWidth) {
                 restWidth = this.moveWidth - this.restWidth;
             }
-            let element = this.parentDom;
+            let element = this.scrollDom;
             let target = this.left + restWidth;
             this.animate(element, this.left, target, false, this.speed);
             this.left = target;
@@ -87,7 +90,7 @@ class HorizontalRollPagination {
     nextEvent() {
         let restWidth = this.count * this.subWidth;
         if(this.restWidth === 0 && this.loop) {
-            let element = this.parentDom;
+            let element = this.scrollDom;
             let target = 0;
             this.animate(element, this.left, target, false, this.speed, true);
             this.left = target;
@@ -98,7 +101,7 @@ class HorizontalRollPagination {
             if(this.restWidth < restWidth) {
                 restWidth = this.restWidth;
             }
-            let element = this.parentDom;
+            let element = this.scrollDom;
             let target = this.left - restWidth;
             this.animate(element, this.left, target, true, this.speed);
             this.left = target;
