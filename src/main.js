@@ -30,12 +30,10 @@ class HorizontalRollPagination {
     }
 
     init() {
-        if(!this.loop) {
+        if (!this.loop) {
             this.preDom.style.display = 'none';
         }
-
         this.preDom.addEventListener('click', this.preEvent.bind(this), false);
-
         this.nextDom.addEventListener('click', this.nextEvent.bind(this), false);
     }
 
@@ -49,10 +47,11 @@ class HorizontalRollPagination {
         this.restWidth = this.restWidth - gap;
         this.parentWidth = parentWidth;
         this.count = this.getTotalPage(this.parentWidth, this.subWidth, this.subList.length);
+        this.checkClickButton();
     }
 
     /**
-     * 展示数发生改变时，需要重新设置
+     * 相数发生改变时，需要重新设置
      */
     reset() {
         this.subList = this.getChildren(this.itemsDom);
@@ -61,6 +60,7 @@ class HorizontalRollPagination {
         this.restWidth = this.moveWidth;
         this.parentWidth = parentWidth;
         this.count = this.getTotalPage(this.parentWidth, this.subWidth, this.subList.length);
+        this.checkClickButton();
     }
 
     preEvent() {
