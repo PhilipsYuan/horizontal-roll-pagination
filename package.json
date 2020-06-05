@@ -2,7 +2,7 @@
     "name": "horizontal-roll-pagination",
     "version": "1.0.0",
     "scripts": {
-        "build": "babel build"
+        "build": "sh covertJs.sh"
     },
     "dependencies": {
         "babel-cli": "^6.26.0",

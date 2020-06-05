@@ -1,7 +1,9 @@
 # 横向滚动翻页
  横向滚动插件，是一个有横向翻页按钮，同时翻页时有滚动效果的插件。在公司官网展示不是很多东西情况下会经常用到。
  
-demo
+## demo
+可以在本地下载这个项目： https://github.com/PhilipsYuan/horizontal-roll-pagination，
+然后在 本地跑下demo.html 文件
  
 ## 使用说明
 1. 你需要引入horizontal-roll-pagination.js， 引入之后会在全局window下有个属性HorizontalRollPagination，你可以new 它创建实例。

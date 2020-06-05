@@ -12,9 +12,9 @@ class HorizontalRollPagination {
         this.speed = config.speed || 5;
         // 盒子的宽
         this.parentWidth = parseInt(window.getComputedStyle(this.boxDom).width);
-        this.itemsDom = config.itemsDom;
+        this.parentDom = config.parentDom;
         // 子节点数组
-        this.subList = this.getChildren(config.itemsDom);
+        this.subList = this.getChildren(config.parentDom);
         // 子节点宽
         this.subWidth = parseInt(window.getComputedStyle(this.subList[0]).width)
             + parseInt(window.getComputedStyle(this.subList[0]).marginLeft)
@@ -54,13 +54,14 @@ class HorizontalRollPagination {
      * 相数发生改变时，需要重新设置
      */
     reset() {
-        this.subList = this.getChildren(this.itemsDom);
-        let parentWidth = parseInt(window.getComputedStyle(this.boxDom).width);
-        this.moveWidth = this.subList.length * this.subWidth - parentWidth;
-        this.restWidth = this.moveWidth;
-        this.parentWidth = parentWidth;
-        this.count = this.getTotalPage(this.parentWidth, this.subWidth, this.subList.length);
-        this.checkClickButton();
+        this.subList = this.getChildren(this.parentDom);
+        let newMoveWidth = this.subList.length * this.subWidth - this.parentWidth;
+        if (newMoveWidth !== this.moveWidth) {
+            this.moveWidth = newMoveWidth;
+            this.restWidth = this.moveWidth;
+            this.count = this.getTotalPage(this.parentWidth, this.subWidth, this.subList.length);
+            this.checkClickButton();
+        }
     }
 
     preEvent() {
@@ -111,8 +112,11 @@ class HorizontalRollPagination {
     }
 
     checkClickButton () {
-        if(!this.loop) {
-            if(this.restWidth == 0) {
+        if (this.subList.length * this.subWidth < this.parentWidth) {
+            this.preDom.style.display = 'none';
+            this.nextDom.style.display = 'none';
+        } else if(!this.loop) {
+            if (this.restWidth == 0) {
                 this.preDom.style.display = 'block';
                 this.nextDom.style.display = 'none';
             } else if(this.restWidth == this.moveWidth) {
